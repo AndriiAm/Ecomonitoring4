@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/favicon1.ico">
+    <title>Моніторинг забруднюючих викидів міст України</title>
+</head>
+
+
+<body>
+
+
+<main>
+    <table id="tab">
+        <tr>
+            <th colspan="9">Потенційний ризик токсикологічної небезпеки питної води</th>
+        </tr>
+        <tr class="first">
+
+            <td>Об'єкт</td>
+            <td>Речовина</td>
+            <td>Конц</td>
+
+            <td>Риск</td>
+            <td>Висновок</td>
+
+            <td>Риск для баб</td>
+            <td>Висновок для баб</td>
+            <td>Рік спостережень</td>
+
+
+
+
+        </tr>
+
+        <tr class="row">
+            {{#each Pollution}}
+                {{Table this.ObjectNumber this.ElementNumber this.CW this.YearOfData}}
+            {{/each}}
+        </tr>
+    </table>
+
+
+    <table id="tab">
+        <tr>
+            <th colspan="9">Оцінка потенційного ризику токсикологічної небезпеки поверхневих вод</th>
+        </tr>
+        <tr class="first">
+
+            <td>Об'єкт</td>
+            <td>Речовина</td>
+            <td>Конц</td>
+            <td>Риск</td>
+            <td>Оценка</td>
+            <td>Рік спостережень</td>
+
+
+        </tr>
+
+        <tr class="row">
+            {{#each Pollution}}
+                {{Table1 this.ObjectNumber this.ElementNumber this.CW this.YearOfData}}
+            {{/each}}
+        </tr>
+    </table>
+
+
+    <table id="tab">
+        <tr>
+            <th colspan="9">Ризик за водневим показником </th>
+        </tr>
+        <tr class="first">
+
+            <td>Об'єкт</td>
+            <td>Ph</td>
+            <td>Риск</td>
+            <td>Рік спостережень</td>
+
+
+        </tr>
+
+        <tr class="row">
+            {{#each MonitorObjects}}
+                {{Table2 this.pH this.ObjectName this.ID}}
+            {{/each}}
+        </tr>
+    </table>
+
+
+    <table id="tab">
+        <tr>
+            <th colspan="9">Оцінка потенційного ризику за органолептичними показниками якості поверхневих вод </th>
+        </tr>
+        <tr class="first">
+
+            <td>Об'єкт</td>
+            <td>Ц</td>
+            <td>Ф</td>
+            <td>Риск</td>
+            <td>Рік спостережень</td>
+
+
+        </tr>
+
+        <tr class="row">
+            {{#each MonitorObjects}}
+                {{Table3 this.F this.C this.ObjectName this.ID }}
+            {{/each}}
+        </tr>
+    </table>
+
+
+    <table id="tab">
+        <tr>
+            <th colspan="9">Оцінка потенційного ризику епідеміологічної небезпеки поверхневих вод </th>
+        </tr>
+        <tr class="first">
+
+            <td>Об'єкт</td>
+            <td>Риск</td>
+            <td>Рік спостережень</td>
+
+
+        </tr>
+
+        <tr class="row">
+            {{#each MonitorObjects}}
+                {{Table4 this.X1 this.X2 this.X3 this.ObjectName this.ID}}
+            {{/each}}
+        </tr>
+    </table>
+
+
+
+</main>
+
+
+
+</body>
+</html>
