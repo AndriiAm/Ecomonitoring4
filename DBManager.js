@@ -269,6 +269,7 @@ hbs.registerHelper("Table2",function (ph,ObjectName,ID) {
         result += `<td >${res} </td>`;
         result += `<td >${res} </td>`;
     }
+    // ghfg
     let year = "";
     for(let i =0; i <PollutionLoad.length; i++) {
         if (ID == PollutionLoad[i].ObjectNumber){
