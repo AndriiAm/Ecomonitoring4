@@ -15,7 +15,7 @@ app.set("view engine", "hbs");
 const connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'password',
+    password : 'Bodyspray345#',
     database : 'EcoMonitoring4'
 });
 
@@ -67,11 +67,8 @@ app.get("/", function(req, res){
 
     });
 
-
-
 });
-let lox45 = 0;
-let lox46 = 0;
+
 
 
 function Compare(Risk){
@@ -96,43 +93,8 @@ hbs.registerHelper("Table",function (a,b,c,d){
     let result="";
     let tempMan = "";
     let tempWoman = "";
-    let Risk = "";
-    let arr= new Array();
-    arr[0] = 0.01578231;
-    arr[1] = 0.01718991;
-    arr[2] = 0.18676930;
-    arr[3] = 0.07570311;
-    arr[4] = 0.08798033;
-    arr[5] = 0.08531532;
-    arr[6] = 0.04600324;
-    arr[7] = 0.12020923;
-    arr[8] = 0.04350018;
-    arr[9] = 0.06390245;
-    arr[10] = 0.17696047;
-    arr[11] = 0.16090452;
-    arr[12] = 0.03506042;
-    arr[13] = 0.0550699;
-
-    let arr1 = new Array();
-    arr1[0] = 0.01539659;
-    arr1[1] = 0.01318901;
-    arr1[2] = 0.16659679;
-    arr1[3] = 0.06510881;
-    arr1[4] = 0.07789811;
-    arr1[5] = 0.06420421;
-    arr1[6] = 0.04756310;
-    arr1[7] = 0.11417027;
-    arr1[8] = 0.05152821;
-    arr1[9] = 0.05956845;
-    arr1[10] = 0.18294569;
-    arr1[11] = 0.15716036;
-    arr1[12] = 0.03734936;
-    arr1[13] = 0.06005681;
-
-
-
-
-
+    let RiskMan = "";
+    let RiskWoman = "";
 
 
     for(let i =0; i <MonitorObjectsLoad.length; i++){
@@ -150,29 +112,31 @@ hbs.registerHelper("Table",function (a,b,c,d){
     result += `<td class = "cell">${c} </td>`;
 
     tempMan = c * StandartValuesLoad[1].Man * StandartValuesLoad[3].Man * (StandartValuesLoad[4].Man/StandartValuesLoad[0].Man) * StandartValuesLoad[2].Man;
-    result += `<td >${arr[lox45]} </td>`;
 
-
-    result += `<td >${Compare(arr[lox45])} </td>`;
 
     tempWoman = c * StandartValuesLoad[1].Woman * StandartValuesLoad[3].Woman * (StandartValuesLoad[4].Woman/StandartValuesLoad[0].Woman) * StandartValuesLoad[2].Woman;
-    result += `<td >${arr1[lox45]} </td>`;
-    result += `<td >${Compare(arr1[lox45])} </td>`;
-    lox45++;
 
 
 
 
-    /*    for(let i =0; i <TraceElementsLoad.length; i++){
+
+        for(let i =0; i <TraceElementsLoad.length; i++){
             if(b == TraceElementsLoad[i].ID){
-
-                let lox4 = TraceElementsLoad[i].Amount*TraceElementsLoad[i].k3;
-                Risk  = 1 - Math.exp( Math.log(TraceElementsLoad[i].OSF)/lox4 *tempMan);
+                RiskMan  = 1 - Math.exp( (Math.log(TraceElementsLoad[i].OSF)/TraceElementsLoad[i].Amount*TraceElementsLoad[i].k3) *tempMan);
+                RiskMan = RiskMan.toFixed(4);
             }
-        }*/
+        }
 
-
-
+    result += `<td >${RiskMan} </td>`;
+    result += `<td >${Compare(RiskMan)} </td>`;
+    for(let i =0; i <TraceElementsLoad.length; i++){
+        if(b == TraceElementsLoad[i].ID){
+            RiskWoman  = 1 - Math.exp( (Math.log(TraceElementsLoad[i].OSF)/TraceElementsLoad[i].Amount*TraceElementsLoad[i].k3) *tempWoman);
+            RiskWoman = RiskWoman.toFixed(4);
+        }
+    }
+    result += `<td >${RiskWoman} </td>`;
+    result += `<td >${Compare(RiskWoman)} </td>`;
     result += `<td >${d} </td>`;
 
     return new hbs.SafeString(`<tr class="row">${result}</tr>`);
@@ -185,21 +149,7 @@ hbs.registerHelper("Table1",function (a,b,c,d) {
     let result = " ";
     let Risk = "";
 
-    let arr= new Array();
-    arr[0] = 0.01498024;
-    arr[1] = 0.01731536;
-    arr[2] = 0.18867841;
-    arr[3] = 0.06934906;
-    arr[4] = 0.09359605;
-    arr[5] = 0.08034570;
-    arr[6] = 0.06095490;
-    arr[7] = 0.10349859;
-    arr[8] = 0.05034095;
-    arr[9] = 0.07548041;
-    arr[10] = 0.15605230;
-    arr[11] = 0.16090452;
-    arr[12] = 0.02029341;
-    arr[13] = 0.06254063;
+
 /*
     for(let i =0; i <TraceElementsLoad.length; i++){
         if(b == TraceElementsLoad[i].ID){
@@ -207,6 +157,8 @@ hbs.registerHelper("Table1",function (a,b,c,d) {
         }
     }
 */
+
+
     for(let i =0; i <MonitorObjectsLoad.length; i++){
         if(a == MonitorObjectsLoad[i].ID){
             result += `<td class = "cell">${MonitorObjectsLoad[i].ObjectName} </td>`;
@@ -220,10 +172,17 @@ hbs.registerHelper("Table1",function (a,b,c,d) {
     }
 
     result += `<td class = "cell">${c} </td>`;
-    result += `<td >${arr[lox46]} </td>`;
-    result += `<td >${Compare(arr[lox46])} </td>`;
+
+    for(let i =0; i <TraceElementsLoad.length; i++){
+        if(b == TraceElementsLoad[i].ID){
+            Risk   = 1 - Math.exp( Math.log(0.84)/(TraceElementsLoad[i].Amount *TraceElementsLoad[i].k3 * 4)) * c;
+            Risk = Risk.toFixed(4);
+
+        }
+    }
+    result += `<td >${Risk} </td>`;
+    result += `<td >${Compare(Risk)} </td>`;
     result += `<td >${d} </td>`;
-    lox46++;
 
     return new hbs.SafeString(`<tr class="row">${result}</tr>`);
 
@@ -269,7 +228,6 @@ hbs.registerHelper("Table2",function (ph,ObjectName,ID) {
         result += `<td >${res} </td>`;
         result += `<td >${res} </td>`;
     }
-    // ghfg
     let year = "";
     for(let i =0; i <PollutionLoad.length; i++) {
         if (ID == PollutionLoad[i].ObjectNumber){
@@ -353,11 +311,6 @@ hbs.registerHelper("Table4",function (X1,X2,X3,ObjectName,ID) {
     return new hbs.SafeString(`<tr class="row">${result}</tr>`);
 
 });
-
-
-
-
-
 
 const port = 3307;
 app.listen(port, () =>
