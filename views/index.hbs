@@ -5,138 +5,162 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="images/favicon1.ico">
-    <title>Моніторинг забруднюючих викидів міст України</title>
+    <link rel="shortcut icon" href="images/favicon1.png">
+    <title>Оцінка потенційного ризику здоров'ю населення в залежності від якості води</title>
 </head>
 
 
 <body>
+    <nav>
+        <img id="nav_logo" src="images/logo.png" alt="">
+        <ul id="nav_wrapper">
+            <li><a href="#entering">Вступ</a></li>
+            <li><a href="#table1">Статистика</a></li>
+            <li><a href="">Посилання</a></li>
+            <li><a href="#contacts">Контакти</a></li>
+        </ul>
+    </nav>
 
+    <main id="main_wrapper">
+        <div id="entering">
+            Можливо, наші читачі коли-небудь звертали увагу на кількість та регулярність новин, в котрих ми чуємо про
+            забруднення тієї чи іншої річки. Щомісяця контролюючі органи звітують про виявлення підвищеної концентрації
+            забруднюючих речовин чи небезпечних викидів як у великих річках Україні - Дніпрі або Інгульці, так і в
+            невеликих, на кшталт Росі чи Десни. Подібне призводить не тільки до руйнування місцевих екосистем, а й має
+            безпосередній вплив на здоров'я та життя людини. <br>
+            Нами було вирішено провести дослідження, в якому ми зібрали дані щодо забрудення та вмісту шкідливих речовин
+            у річках Київської області з метою оцінити потенційний ризик тоскикологочної небезпеки питної воді з цих
+            річок для людей. Пропонуємо ознайомитись з результатами у нижче наведених таблицях.
+        </div>
 
-<main>
-    <table id="tab">
-        <tr>
-            <th colspan="9">Потенційний ризик токсикологічної небезпеки питної води</th>
-        </tr>
-        <tr class="first">
+        <table id="table1">
+            <tr>
+                <th colspan="9">Потенційний ризик токсикологічної небезпеки питної води</th>
+            </tr>
 
-            <td>Об'єкт</td>
-            <td>Речовина</td>
-            <td>Конц</td>
+            <tr class="first">
+                <td>Об'єкт</td>
+                <td>Речовина</td>
+                <td>Концентрація</td>
+                <td>Риск</td>
+                <td>Висновок</td>
+                <td>Риск для баб</td>
+                <td>Висновок для баб</td>
+                <td>Рік спостережень</td>
+            </tr>
 
-            <td>Риск</td>
-            <td>Висновок</td>
+            <tr class="row">
+                {{#each Pollution}}
+                    {{Table this.ObjectNumber this.ElementNumber this.CW this.YearOfData}}
+                {{/each}}
+            </tr>
+        </table>
 
-            <td>Риск для баб</td>
-            <td>Висновок для баб</td>
-            <td>Рік спостережень</td>
+        <table id="table2">
+            <tr>
+                <th colspan="9">Оцінка потенційного ризику токсикологічної небезпеки поверхневих вод</th>
+            </tr>
 
+            <tr class="first">
+                <td>Об'єкт</td>
+                <td>Речовина</td>
+                <td>Концентрація</td>
+                <td>Риск</td>
+                <td>Оценка</td>
+                <td>Рік спостережень</td>
+            </tr>
 
+            <tr class="row">
+                {{#each Pollution}}
+                    {{Table1 this.ObjectNumber this.ElementNumber this.CW this.YearOfData}}
+                {{/each}}
+            </tr>
+        </table>
 
+        <table id="table3">
+            <tr>
+                <th colspan="9">Ризик за водневим показником </th>
+            </tr>
 
-        </tr>
+            <tr class="first">
+                <td>Об'єкт</td>
+                <td>Ph</td>
+                <td>Риск</td>
+                <td>Рік спостережень</td>
+            </tr>
 
-        <tr class="row">
-            {{#each Pollution}}
-                {{Table this.ObjectNumber this.ElementNumber this.CW this.YearOfData}}
-            {{/each}}
-        </tr>
-    </table>
+            <tr class="row">
+                {{#each MonitorObjects}}
+                    {{Table2 this.pH this.ObjectName this.ID}}
+                {{/each}}
+            </tr>
+        </table>
 
+        <table id="table4">
+            <tr>
+                <th colspan="9">Оцінка потенційного ризику за органолептичними показниками якості поверхневих вод </th>
+            </tr>
 
-    <table id="tab">
-        <tr>
-            <th colspan="9">Оцінка потенційного ризику токсикологічної небезпеки поверхневих вод</th>
-        </tr>
-        <tr class="first">
+            <tr class="first">
+                <td>Об'єкт</td>
+                <td>Ц</td>
+                <td>Ф</td>
+                <td>Риск</td>
+                <td>Рік спостережень</td>
+            </tr>
 
-            <td>Об'єкт</td>
-            <td>Речовина</td>
-            <td>Конц</td>
-            <td>Риск</td>
-            <td>Оценка</td>
-            <td>Рік спостережень</td>
+            <tr class="row">
+                {{#each MonitorObjects}}
+                    {{Table3 this.F this.C this.ObjectName this.ID }}
+                {{/each}}
+            </tr>
+        </table>
 
+        <table id="table5">
+            <tr>
+                <th colspan="9">Оцінка потенційного ризику епідеміологічної небезпеки поверхневих вод </th>
+            </tr>
 
-        </tr>
+            <tr class="first">
+                <td>Об'єкт</td>
+                <td>Риск</td>
+                <td>Рік спостережень</td>
+            </tr>
 
-        <tr class="row">
-            {{#each Pollution}}
-                {{Table1 this.ObjectNumber this.ElementNumber this.CW this.YearOfData}}
-            {{/each}}
-        </tr>
-    </table>
+            <tr class="row">
+                {{#each MonitorObjects}}
+                    {{Table4 this.X1 this.X2 this.X3 this.ObjectName this.ID}}
+                {{/each}}
+            </tr>
+        </table>
 
+        <p id="description1">Пропонуємо за посиланнями додатково ознайомитись з оцінкою екологічної ситуації деяких річок України:</p>
+        <figure id="photo1">
+            <a href="http://www.ecoj.dea.kiev.ua/archives/2019/1/part_1/22.pdf" target="_blank"><img src="images/Dnepr.jpg" alt=""></a>
+            <br>Дніпро
+        </figure>
+        <figure id="photo2">
+            <a href="https://dspace.nau.edu.ua/bitstream/NAU/55492/1/%D0%94%D0%B8%D0%BF%D0%BB%D0%BE%D0%BC%D0%BD%D0%B0_%D1%80%D0%BE%D0%B1%D0%BE%D1%82%D0%B0_%D0%9A%D0%B0%D1%81%D1%96%D0%BC%D0%BE%D0%B2%D0%B0_%D0%9A%D0%B0%D1%80%D0%B8%D0%BD%D0%B0_%D1%80%D0%B5%D0%B4%D0%B0%D0%B3.pdf" target="_blank"><img src="images/Irpen.jpg" alt=""></a>
+            <br>Ірпінь
+        </figure>
+        <figure id="photo3">
+            <a href="https://nv.nltu.edu.ua/Archive/2018/28_6/13.pdf" target="_blank"><img src="images/Desna.jpg" alt=""></a>
+            <br>Десна
+        </figure>
+    </main>
 
-    <table id="tab">
-        <tr>
-            <th colspan="9">Ризик за водневим показником </th>
-        </tr>
-        <tr class="first">
+    <footer>
+        <a href="https://mepr.gov.ua/" target="_blank" id="contacts"><img src="images/logo1.png" width="80px" alt=""></a><br>
+        <p>
+            mobile:<a href = "tel:(044) 206-31-15"> (044) 206-31-15</a>&nbsp
+            <span style="border-left:3px solid #34BECB;"></span>
+            &nbsp email:<a href = "mailto:info@mepr.gov.ua"> info@mepr.gov.ua</a><br>
+        </p>
 
-            <td>Об'єкт</td>
-            <td>Ph</td>
-            <td>Риск</td>
-            <td>Рік спостережень</td>
-
-
-        </tr>
-
-        <tr class="row">
-            {{#each MonitorObjects}}
-                {{Table2 this.pH this.ObjectName this.ID}}
-            {{/each}}
-        </tr>
-    </table>
-
-
-    <table id="tab">
-        <tr>
-            <th colspan="9">Оцінка потенційного ризику за органолептичними показниками якості поверхневих вод </th>
-        </tr>
-        <tr class="first">
-
-            <td>Об'єкт</td>
-            <td>Ц</td>
-            <td>Ф</td>
-            <td>Риск</td>
-            <td>Рік спостережень</td>
-
-
-        </tr>
-
-        <tr class="row">
-            {{#each MonitorObjects}}
-                {{Table3 this.F this.C this.ObjectName this.ID }}
-            {{/each}}
-        </tr>
-    </table>
-
-
-    <table id="tab">
-        <tr>
-            <th colspan="9">Оцінка потенційного ризику епідеміологічної небезпеки поверхневих вод </th>
-        </tr>
-        <tr class="first">
-
-            <td>Об'єкт</td>
-            <td>Риск</td>
-            <td>Рік спостережень</td>
-
-
-        </tr>
-
-        <tr class="row">
-            {{#each MonitorObjects}}
-                {{Table4 this.X1 this.X2 this.X3 this.ObjectName this.ID}}
-            {{/each}}
-        </tr>
-    </table>
-
-
-
-</main>
-
+        <p id="copyright">
+            Copyright &copy; 2021
+        </p>
+    </footer>
 
 
 </body>
